@@ -8,7 +8,6 @@ const loadProducts = (url) => {
          showProducts(data);
       });
 };
-
 loadProducts('https://fakestoreapi.com/products');
 
 // show all product in UI
@@ -18,7 +17,7 @@ const showProducts = (products) => {
 
    document.getElementById("all-products").innerHTML = "";
 
-   const allProducts = products.slice(0, 10).map((pd) => pd);
+   const allProducts = products.map((pd) => pd);
    for (const product of allProducts) {
       const image = product.image;
       const div = document.createElement('div');
@@ -114,10 +113,11 @@ const updateTotal = () => {
 // search by category
 document.getElementById("search-btn").addEventListener("click", function () {
    const inputField = document.getElementById("input-value").value;
-   const searchedProduct = arr[0].find((p) =>
-      p.category.startsWith(`${inputField}`)
+   const inputFieldLS = inputField.toLowerCase();
+   console.log(inputFieldLS);
+   console.log(arr[0]);
+   const searchedProduct = arr[0].filter((p) =>
+      p.category.includes(`${inputFieldLS}`)
    );
    showProducts(searchedProduct);
 });
-
-
